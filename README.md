@@ -5,3 +5,6 @@
 
 `nvcc -V` //should give 12.2
 
+`nvcc mat-mul.cu -o mat-mul.out` //compile
+
+`time ./mat-mul.out` //time
