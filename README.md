@@ -18,3 +18,12 @@
 
 `rocm-smi` //should give amd gpu info
 
+Hipify the cuda code
+
+`hipify-perl mat-mul.cu > mat-mul.cu.hip`
+
+Compile
+
+`hipcc mat-mul.cu.hip -o mat-mul-amd.out`
+
+`time ./mat-mul-amd.out`
