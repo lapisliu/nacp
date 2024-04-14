@@ -1,0 +1,103 @@
+Using GPU, device name: AMD Instinct MI250X/MI250
+mnist dataset mean=0.13066047430038452
+Training epoch: 1
+Training loss: 0.904194, accuracy: 78.07% num_batches: 1875
+Training epoch: 2
+Training loss: 0.388594, accuracy: 89.24% num_batches: 1875
+Training epoch: 3
+Training loss: 0.335986, accuracy: 90.56% num_batches: 1875
+Training epoch: 4
+Training loss: 0.311503, accuracy: 91.21% num_batches: 1875
+Training epoch: 5
+Training loss: 0.295375, accuracy: 91.66% num_batches: 1875
+Training epoch: 6
+Training loss: 0.283036, accuracy: 92.03% num_batches: 1875
+Training epoch: 7
+Training loss: 0.272822, accuracy: 92.28% num_batches: 1875
+Training epoch: 8
+Training loss: 0.263889, accuracy: 92.52% num_batches: 1875
+Training epoch: 9
+Training loss: 0.255744, accuracy: 92.72% num_batches: 1875
+Training epoch: 10
+Training loss: 0.248473, accuracy: 92.96% num_batches: 1875
+Training epoch: 11
+Training loss: 0.242133, accuracy: 93.14% num_batches: 1875
+Training epoch: 12
+Training loss: 0.236453, accuracy: 93.30% num_batches: 1875
+Training epoch: 13
+Training loss: 0.231248, accuracy: 93.44% num_batches: 1875
+Training epoch: 14
+Training loss: 0.226462, accuracy: 93.58% num_batches: 1875
+Training epoch: 15
+Training loss: 0.221979, accuracy: 93.69% num_batches: 1875
+Training epoch: 16
+Training loss: 0.217753, accuracy: 93.80% num_batches: 1875
+Training epoch: 17
+Training loss: 0.213784, accuracy: 93.93% num_batches: 1875
+Training epoch: 18
+Training loss: 0.210003, accuracy: 94.03% num_batches: 1875
+Training epoch: 19
+Training loss: 0.206456, accuracy: 94.14% num_batches: 1875
+Training epoch: 20
+Training loss: 0.203050, accuracy: 94.25% num_batches: 1875
+Training epoch: 21
+Training loss: 0.199759, accuracy: 94.36% num_batches: 1875
+Training epoch: 22
+Training loss: 0.196601, accuracy: 94.44% num_batches: 1875
+Training epoch: 23
+Training loss: 0.193547, accuracy: 94.51% num_batches: 1875
+Training epoch: 24
+Training loss: 0.190601, accuracy: 94.59% num_batches: 1875
+Training epoch: 25
+Training loss: 0.187826, accuracy: 94.67% num_batches: 1875
+Training epoch: 26
+Training loss: 0.185169, accuracy: 94.74% num_batches: 1875
+Training epoch: 27
+Training loss: 0.182623, accuracy: 94.80% num_batches: 1875
+Training epoch: 28
+Training loss: 0.180169, accuracy: 94.87% num_batches: 1875
+Training epoch: 29
+Training loss: 0.177819, accuracy: 94.92% num_batches: 1875
+Training epoch: 30
+Training loss: 0.175561, accuracy: 94.98% num_batches: 1875
+Training epoch: 31
+Training loss: 0.173360, accuracy: 95.06% num_batches: 1875
+Training epoch: 32
+Training loss: 0.171260, accuracy: 95.12% num_batches: 1875
+Training epoch: 33
+Training loss: 0.169298, accuracy: 95.15% num_batches: 1875
+Training epoch: 34
+Training loss: 0.167411, accuracy: 95.21% num_batches: 1875
+Training epoch: 35
+Training loss: 0.165637, accuracy: 95.25% num_batches: 1875
+Training epoch: 36
+Training loss: 0.163928, accuracy: 95.30% num_batches: 1875
+Training epoch: 37
+Training loss: 0.162295, accuracy: 95.33% num_batches: 1875
+Training epoch: 38
+Training loss: 0.160727, accuracy: 95.38% num_batches: 1875
+Training epoch: 39
+Training loss: 0.159244, accuracy: 95.44% num_batches: 1875
+Training epoch: 40
+Training loss: 0.157814, accuracy: 95.50% num_batches: 1875
+Training epoch: 41
+Training loss: 0.156436, accuracy: 95.54% num_batches: 1875
+Training epoch: 42
+Training loss: 0.155121, accuracy: 95.58% num_batches: 1875
+Training epoch: 43
+Training loss: 0.153878, accuracy: 95.60% num_batches: 1875
+Training epoch: 44
+Training loss: 0.152691, accuracy: 95.64% num_batches: 1875
+Training epoch: 45
+Training loss: 0.151552, accuracy: 95.68% num_batches: 1875
+Training epoch: 46
+Training loss: 0.150455, accuracy: 95.71% num_batches: 1875
+Training epoch: 47
+Training loss: 0.149375, accuracy: 95.74% num_batches: 1875
+Training epoch: 48
+Training loss: 0.148314, accuracy: 95.76% num_batches: 1875
+Training epoch: 49
+Training loss: 0.147298, accuracy: 95.79% num_batches: 1875
+Training epoch: 50
+Training loss: 0.146287, accuracy: 95.83% num_batches: 1875
+50 epochs: 272.0071437358856 seconds
