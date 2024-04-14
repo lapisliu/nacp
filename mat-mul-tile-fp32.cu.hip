@@ -1,10 +1,11 @@
+#include "hip/hip_runtime.h"
 #include <iostream>
-#include <cuda_runtime.h>
+#include <hip/hip_runtime.h>
 
 // Define matrix dimensions
-const int M = 20000; // Number of rows in matrix A
-const int K = 3333; // Number of columns in matrix A, Number of rows in matrix B
-const int N = 7777; // Number of columns in matrix B
+const int M = 4096; // Number of rows in matrix A
+const int K = 65536; // Number of columns in matrix A, Number of rows in matrix B
+const int N = 4096; // Number of columns in matrix B
 //const int BLOCK_SIZE = 2;
 const int TILE_SIZE = 16;
 
@@ -48,40 +49,61 @@ __global__ void matrixMul(T *a, T *b, T *c, int m, int k, int n) {
 }
 
 int main() {
-    int a[M][K], b[K][N], c[M][N];
-    int *dev_a, *dev_b, *dev_c;
+    float a[M][K], b[K][N], c[M][N];
+    float *dev_a, *dev_b, *dev_c;
+    hipEvent_t start, stop;
+    float elapsedTime=1.0f;
 
     // Initialize matrices a and b
     for (int i = 0; i < M; ++i) {
         for (int j = 0; j < K; ++j) {
-            a[i][j] = 2;
+            a[i][j] = 2.0f;
         }
     }
 
     for (int i = 0; i < K; ++i) {
         for (int j = 0; j < N; ++j) {
-            b[i][j] = 1;
+            b[i][j] = 1.0f;
         }
     }
 
     // Allocate memory on the device
-    cudaMalloc((void**)&dev_a, M * K * sizeof(int));
-    cudaMalloc((void**)&dev_b, K * N * sizeof(int));
-    cudaMalloc((void**)&dev_c, M * N * sizeof(int));
+    hipMalloc((void**)&dev_a, M * K * sizeof(int));
+    hipMalloc((void**)&dev_b, K * N * sizeof(int));
+    hipMalloc((void**)&dev_c, M * N * sizeof(int));
 
     // Copy matrices a and b from host to device memory
-    cudaMemcpy(dev_a, a, M * K * sizeof(int), cudaMemcpyHostToDevice);
-    cudaMemcpy(dev_b, b, K * N * sizeof(int), cudaMemcpyHostToDevice);
+    hipMemcpy(dev_a, a, M * K * sizeof(int), hipMemcpyHostToDevice);
+    hipMemcpy(dev_b, b, K * N * sizeof(int), hipMemcpyHostToDevice);
 
     // Define grid and block dimensions
     dim3 threadsPerBlock(TILE_SIZE, TILE_SIZE);
     dim3 numBlocks((N + TILE_SIZE - 1) / TILE_SIZE, (M + TILE_SIZE - 1) / TILE_SIZE);
 
+    // Create CUDA events for timing
+    hipEventCreate(&start);
+    hipEventCreate(&stop);
+
+    // Record the start event
+    hipEventRecord(start, 0);
+
     // Launch kernel
     matrixMul<<<numBlocks, threadsPerBlock>>>(dev_a, dev_b, dev_c, M, K, N);
 
+    // Record the stop event
+    hipEventRecord(stop, 0);
+
+    // Synchronize to make sure stop event is recorded
+    hipEventSynchronize(stop);
+
+    // Calculate elapsed time
+    hipEventElapsedTime(&elapsedTime, start, stop);
+
+     // Print the elapsed time
+    std::cout << "Kernel execution time: " << elapsedTime << " milliseconds" << std::endl;
+
     // Copy result matrix c from device to host memory
-    cudaMemcpy(c, dev_c, M * N * sizeof(int), cudaMemcpyDeviceToHost);
+    hipMemcpy(c, dev_c, M * N * sizeof(int), hipMemcpyDeviceToHost);
 
     // Print the result matrix
 //    std::cout << "Result matrix:" << std::endl;
@@ -93,9 +115,9 @@ int main() {
 //    }
 
     // Free device memory
-    cudaFree(dev_a);
-    cudaFree(dev_b);
-    cudaFree(dev_c);
+    hipFree(dev_a);
+    hipFree(dev_b);
+    hipFree(dev_c);
 
     return 0;
 }
