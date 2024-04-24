@@ -1,0 +1,103 @@
+Using GPU, device name: NVIDIA H100 80GB HBM3
+mnist dataset mean=0.13066047430038452
+Training epoch: 1
+Training loss: 0.904194, accuracy: 78.07% num_batches: 1875
+Training epoch: 2
+Training loss: 0.388594, accuracy: 89.24% num_batches: 1875
+Training epoch: 3
+Training loss: 0.335986, accuracy: 90.56% num_batches: 1875
+Training epoch: 4
+Training loss: 0.311503, accuracy: 91.21% num_batches: 1875
+Training epoch: 5
+Training loss: 0.295375, accuracy: 91.66% num_batches: 1875
+Training epoch: 6
+Training loss: 0.283036, accuracy: 92.03% num_batches: 1875
+Training epoch: 7
+Training loss: 0.272822, accuracy: 92.28% num_batches: 1875
+Training epoch: 8
+Training loss: 0.263889, accuracy: 92.52% num_batches: 1875
+Training epoch: 9
+Training loss: 0.255744, accuracy: 92.72% num_batches: 1875
+Training epoch: 10
+Training loss: 0.248473, accuracy: 92.96% num_batches: 1875
+Training epoch: 11
+Training loss: 0.242133, accuracy: 93.14% num_batches: 1875
+Training epoch: 12
+Training loss: 0.236453, accuracy: 93.30% num_batches: 1875
+Training epoch: 13
+Training loss: 0.231248, accuracy: 93.44% num_batches: 1875
+Training epoch: 14
+Training loss: 0.226462, accuracy: 93.58% num_batches: 1875
+Training epoch: 15
+Training loss: 0.221979, accuracy: 93.69% num_batches: 1875
+Training epoch: 16
+Training loss: 0.217752, accuracy: 93.80% num_batches: 1875
+Training epoch: 17
+Training loss: 0.213783, accuracy: 93.93% num_batches: 1875
+Training epoch: 18
+Training loss: 0.210003, accuracy: 94.02% num_batches: 1875
+Training epoch: 19
+Training loss: 0.206455, accuracy: 94.14% num_batches: 1875
+Training epoch: 20
+Training loss: 0.203050, accuracy: 94.25% num_batches: 1875
+Training epoch: 21
+Training loss: 0.199763, accuracy: 94.36% num_batches: 1875
+Training epoch: 22
+Training loss: 0.196605, accuracy: 94.42% num_batches: 1875
+Training epoch: 23
+Training loss: 0.193547, accuracy: 94.51% num_batches: 1875
+Training epoch: 24
+Training loss: 0.190600, accuracy: 94.60% num_batches: 1875
+Training epoch: 25
+Training loss: 0.187819, accuracy: 94.67% num_batches: 1875
+Training epoch: 26
+Training loss: 0.185171, accuracy: 94.73% num_batches: 1875
+Training epoch: 27
+Training loss: 0.182610, accuracy: 94.81% num_batches: 1875
+Training epoch: 28
+Training loss: 0.180156, accuracy: 94.87% num_batches: 1875
+Training epoch: 29
+Training loss: 0.177814, accuracy: 94.93% num_batches: 1875
+Training epoch: 30
+Training loss: 0.175546, accuracy: 94.99% num_batches: 1875
+Training epoch: 31
+Training loss: 0.173354, accuracy: 95.05% num_batches: 1875
+Training epoch: 32
+Training loss: 0.171249, accuracy: 95.11% num_batches: 1875
+Training epoch: 33
+Training loss: 0.169275, accuracy: 95.15% num_batches: 1875
+Training epoch: 34
+Training loss: 0.167408, accuracy: 95.22% num_batches: 1875
+Training epoch: 35
+Training loss: 0.165632, accuracy: 95.26% num_batches: 1875
+Training epoch: 36
+Training loss: 0.163931, accuracy: 95.31% num_batches: 1875
+Training epoch: 37
+Training loss: 0.162301, accuracy: 95.34% num_batches: 1875
+Training epoch: 38
+Training loss: 0.160725, accuracy: 95.38% num_batches: 1875
+Training epoch: 39
+Training loss: 0.159245, accuracy: 95.43% num_batches: 1875
+Training epoch: 40
+Training loss: 0.157824, accuracy: 95.49% num_batches: 1875
+Training epoch: 41
+Training loss: 0.156464, accuracy: 95.53% num_batches: 1875
+Training epoch: 42
+Training loss: 0.155137, accuracy: 95.57% num_batches: 1875
+Training epoch: 43
+Training loss: 0.153892, accuracy: 95.59% num_batches: 1875
+Training epoch: 44
+Training loss: 0.152703, accuracy: 95.62% num_batches: 1875
+Training epoch: 45
+Training loss: 0.151566, accuracy: 95.67% num_batches: 1875
+Training epoch: 46
+Training loss: 0.150455, accuracy: 95.71% num_batches: 1875
+Training epoch: 47
+Training loss: 0.149389, accuracy: 95.74% num_batches: 1875
+Training epoch: 48
+Training loss: 0.148331, accuracy: 95.76% num_batches: 1875
+Training epoch: 49
+Training loss: 0.147314, accuracy: 95.79% num_batches: 1875
+Training epoch: 50
+Training loss: 0.146309, accuracy: 95.84% num_batches: 1875
+50 epochs: 147.82723760604858 seconds
