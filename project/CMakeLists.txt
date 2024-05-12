@@ -8,7 +8,6 @@ set(CMAKE_CUDA_ARCHITECTURES ${CUDA_ARCHITECTURE})
 # Include directories
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
-    ${CMAKE_SOURCE_DIR}/tools/util/include
 )
 
 # Find CUDA
