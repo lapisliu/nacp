@@ -2,7 +2,10 @@
 
 #include "util.h"
 
-__global__ void matMulWMMA(half *a, half *b, float *c) {
+using namespace nvcuda;
+constexpr int WARP_SIZE = 16;
+
+__global__ void matMulWMMA(half *a, half *b, float *c, int M, int N, int K) {
     int blockRow = blockIdx.y * blockDim.y + threadIdx.y;
     int blockCol = blockIdx.x * blockIdx.x + threadIdx.x;
 
@@ -47,7 +50,7 @@ float run_wmma(int M, int N, int K) {
     CUDA_CHECK(cudaMalloc((void**)&b_d, K * N * sizeof(half)));
     CUDA_CHECK(cudaMalloc((void**)&c_d, M * N * sizeof(float)));
 
-    InitMatrix(M, N, K, a_blas, b_blas, c_blas);
+    InitMatrix(M, N, K, a, b, c);
 
     CUDA_CHECK(cudaMemcpy(a_d, a, M * K * sizeof(half), cudaMemcpyHostToDevice));
     CUDA_CHECK(cudaMemcpy(b_d, b, K * N * sizeof(half), cudaMemcpyHostToDevice));
@@ -57,7 +60,7 @@ float run_wmma(int M, int N, int K) {
     dim3 threadsPerBlock(WARP_SIZE, WARP_SIZE);
     dim3 blocksPerGrid((N + WARP_SIZE - 1) / WARP_SIZE, (M + WARP_SIZE - 1) / WARP_SIZE);
     CUDA_CHECK(cudaEventRecord(start));
-    matMulWMMA<<<blocksPerGrid, threadsPerBlock>>>(a_d, b_d, c_d);
+    matMulWMMA<<<blocksPerGrid, threadsPerBlock>>>(a_d, b_d, c_d, M, N, K);
     CUDA_KERNEL_CHECK();
     CUDA_CHECK(cudaEventRecord(stop));
     CUDA_CHECK(cudaEventSynchronize(stop));

@@ -58,9 +58,9 @@ int main(int argc, char* argv[]) {
     int N = requiredFlags["n"];
     int K = requiredFlags["k"];
 
-    if (bFalg) run_cublas(M, N, K);
-    if (wFalg) run_wmma(M, N, K);
-    if (lFalg) run_basic_tiling(M, N, K);
+    if (bFlag) run_cublas(M, N, K);
+    if (wFlag) run_wmma(M, N, K);
+    if (lFlag) run_basic_tiling(M, N, K);
 
     std::cout << "done" << std::endl;
     return 0;
