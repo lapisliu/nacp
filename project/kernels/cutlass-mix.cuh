@@ -1,6 +1,6 @@
 #pragma once
 
-#include "util.cuh"
+#include "util.h"
 
 #include <iostream>
 

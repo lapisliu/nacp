@@ -1,6 +1,6 @@
 #pragma once
 
-#include "util.cuh"
+#include "util.h"
 
 __global__ void matMulWMMA(half *a, half *b, float *c) {
     int blockRow = blockIdx.y * blockDim.y + threadIdx.y;

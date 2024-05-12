@@ -1,6 +1,6 @@
 #pragma once
 
-#include "util.cuh"
+#include "util.h"
 
 float run_cublas(int M, int N, int K) {
     half *a, *a_d;
