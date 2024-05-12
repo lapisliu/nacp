@@ -1,32 +1,28 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
+project(MyCUDAProject LANGUAGES CXX CUDA)
 
-project(NACP)
-enable_language(CUDA CXX)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_FLAGS "-Wall -Wextra")
-set(CMAKE_CUDA_FLAGS_DEBUG "-G -g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3")
-link_libraries(-lcurand)
-FILE(
-  GLOB executables
-  ${CMAKE_CURRENT_SOURCE_DIR}/*.cu
-  ${CMAKE_CURRENT_SOURCE_DIR}/*.cuh
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/kernels/*.cuh
-  )
+# Specify the CUDA architecture
+set(CUDA_ARCHITECTURE "52" CACHE STRING "CUDA architecture")
+set(CMAKE_CUDA_ARCHITECTURES ${CUDA_ARCHITECTURE})
 
-FOREACH(exe ${executables})
-  GET_FILENAME_COMPONENT(filename ${exe} NAME_WE)
-  add_executable(${filename} ${exe})
-  set_target_properties(${filename} PROPERTIES CUDA_ARCHITECTURES "70")
-  target_compile_options(
-    ${filename} PRIVATE
-    -Wno-unused-function
-    --expt-relaxed-constexpr
-    )
-  target_include_directories(
-    ${filename} PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
-    )
-ENDFOREACH()
+# Include directories
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/tools/util/include
+)
+
+# Find CUDA
+find_package(CUDA REQUIRED)
+
+# Add .cu and .cuh files
+file(GLOB_RECURSE CUDA_SOURCES "${CMAKE_SOURCE_DIR}/kernels/*.cu")
+file(GLOB_RECURSE HEADERS "${CMAKE_SOURCE_DIR}/include/*.h")
+
+# Executable
+add_executable(${PROJECT_NAME} runner.cu ${CUDA_SOURCES} ${HEADERS})
+
+# Link libraries (if any)
+# target_link_libraries(${PROJECT_NAME} <library_name>)
+
+# Specify C++ standard
+set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)

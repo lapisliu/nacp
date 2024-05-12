@@ -4,15 +4,15 @@
 
 #include <iostream>
 
-#include "include/cutlass.h"
-#include "include/gemm.h"
-#include "include/host_tensor.h"
-#include "include/device_gemm.h"
-#include "include/tensor_compare.h"
-#include "include/tensor_copy.h"
-#include "include/tensor_fill.h"
-#include "include/tensor_view_io.h"
-#include "include/helper.h"
+#include "cutlass/cutlass.h"
+#include "cutlass/gemm/device/gemm.h"
+#include "cutlass/util/host_tensor.h"
+#include "cutlass/util/reference/device/gemm.h"
+#include "cutlass/util/reference/host/tensor_compare.h"
+#include "cutlass/util/reference/host/tensor_copy.h"
+#include "cutlass/util/reference/host/tensor_fill.h"
+#include "cutlass/util/tensor_view_io.h"
+#include "helper.h"
 
 // The code section below describes datatype for input, output matrices and computation between
 // elements in input matrices.

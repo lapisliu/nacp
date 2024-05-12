@@ -5,3 +5,4 @@
 *.cubin
 *.fatbin
 *.out
+.DS_Store
