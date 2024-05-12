@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 project(MyCUDAProject LANGUAGES CXX CUDA)
 
 # Specify the CUDA architecture
-set(CUDA_ARCHITECTURE "52" CACHE STRING "CUDA architecture")
+set(CUDA_ARCHITECTURE "70" CACHE STRING "CUDA architecture")
 set(CMAKE_CUDA_ARCHITECTURES ${CUDA_ARCHITECTURE})
 
 # Include directories
