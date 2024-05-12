@@ -23,7 +23,7 @@ float run_cublas(int M, int N, int K) {
     CUDA_CHECK(cudaMalloc((void**)&b_d, K * N * sizeof(half)));
     CUDA_CHECK(cudaMalloc((void**)&c_d, M * N * sizeof(float)));
 
-    InitMatrix(M, N, K, a_blas, b_blas, c_blas);
+    InitMatrix(M, N, K, a, b, c);
 
     CUDA_CHECK(cudaMemcpy(a_d, a, M * K * sizeof(half), cudaMemcpyHostToDevice));
     CUDA_CHECK(cudaMemcpy(b_d, b, K * N * sizeof(half), cudaMemcpyHostToDevice));
@@ -67,7 +67,7 @@ float run_cublas(int M, int N, int K) {
     CUDA_CHECK(cudaMemcpy(c, c_d, M * N * sizeof(float), cudaMemcpyDeviceToHost));
     CUDA_CHECK(cudaEventElapsedTime(&eventMs, start, stop));
     for (int i = 0; i < 5; i++) {
-        std::cout << c_blas[i] << " ";
+        std::cout << c[i] << " ";
     }
     std::cout << std::endl;
 
