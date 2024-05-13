@@ -69,7 +69,6 @@ float run_cublas(int M, int N, int K) {
     for (int i = 0; i < 5; i++) {
         std::cout << c[i] << " ";
     }
-    std::cout << std::endl;
 
     // Cleanup
     cudaFree(a_d);

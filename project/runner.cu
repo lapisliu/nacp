@@ -59,13 +59,13 @@ int main(int argc, char* argv[]) {
     int K = requiredFlags["k"];
 
     if (bFlag) {
-	    std::cout << "cublas time (ms):" << run_cublas(M, N, K) << std::endl;
+	    std::cout << "cublas output and run time (ms): " << run_cublas(M, N, K) << std::endl;
     }
     if (wFlag) {
-	    std::cout << "wmma time (ms):" << run_wmma(M, N, K) << std::endl;
+	    std::cout << "wmma output and run time (ms): " << run_wmma(M, N, K) << std::endl;
     }
     if (lFlag) {
-	    std::cout << "basic tiling time (ms):" << run_basic_tiling(M, N, K) << std::endl;
+	    std::cout << "basic tiling output and run time (ms): " << run_basic_tiling(M, N, K) << std::endl;
     }
 
     std::cout << "done" << std::endl;
