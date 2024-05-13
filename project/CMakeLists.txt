@@ -22,7 +22,7 @@ file(GLOB_RECURSE HEADERS "${CMAKE_SOURCE_DIR}/include/*.h")
 add_executable(${PROJECT_NAME} runner.cu ${CUDA_SOURCES} ${HEADERS})
 
 # Link libraries
-# target_link_libraries(${PROJECT_NAME} CUDA::cudart CUDA::cublas)
+# target_link_libraries(${PROJECT_NAME} -lcublas -lcublasLt)
 
 # Specify C++ standard
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
