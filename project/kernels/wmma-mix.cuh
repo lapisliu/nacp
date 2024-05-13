@@ -5,7 +5,7 @@
 using namespace nvcuda;
 constexpr int WARP_SIZE = 16;
 
-__global__ void matMulWMMA(half *a, half *b, float *c, int M, int N, int K) {
+__global__ void matMulWMMA(half *a, half *b, float *c, int M, int N, int K, float alpha, float beta) {
     // int blockRow = blockIdx.y * blockDim.y + threadIdx.y;
     // int blockCol = blockIdx.x * blockIdx.x + threadIdx.x;
 
@@ -104,7 +104,7 @@ float run_wmma(int M, int N, int K) {
     dim3 threadsPerBlock(WARP_SIZE, WARP_SIZE);
     dim3 blocksPerGrid((N + WARP_SIZE - 1) / WARP_SIZE, (M + WARP_SIZE - 1) / WARP_SIZE);
     CUDA_CHECK(cudaEventRecord(start));
-    matMulWMMA<<<blocksPerGrid, threadsPerBlock>>>(a_d, b_d, c_d, M, N, K);
+    matMulWMMA<<<blocksPerGrid, threadsPerBlock>>>(a_d, b_d, c_d, M, N, K, 1.0f, 0.0f);
     CUDA_CHECK(cudaEventRecord(stop));
     CUDA_CHECK(cudaEventSynchronize(stop));
     cudaDeviceSynchronize();
