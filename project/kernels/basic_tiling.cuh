@@ -3,22 +3,24 @@
 #include "util.h"
 
 constexpr int TILE_SIZE = 16;
+//Index is a MACRO that returns the element of t tensor at row, col coordinate
+#define Index(t, row, col, stride_h, stride_w) (((t)[(row) * (stride_h) + (col) * (stride_w)]))
 
 __global__ void op_mm_kernel(float *a, float *b, float *c, int M, int N, int K) {
     int blockRow = blockIdx.y * blockDim.y + threadIdx.y;
     int blockCol = blockIdx.x * blockDim.x + threadIdx.x;
-    __shared__ T As[TILE_SIZE][TILE_SIZE];
-    __shared__ T Bs[TILE_SIZE][TILE_SIZE];
-    T r = 0;
+    __shared__ float As[TILE_SIZE][TILE_SIZE];
+    __shared__ float Bs[TILE_SIZE][TILE_SIZE];
+    float r = 0;
     int row = threadIdx.y;
     int col = threadIdx.x;
     for (int k = 0; k < (K + TILE_SIZE - 1) / TILE_SIZE; k++) {
 	    if (blockRow < M && k * TILE_SIZE + col < K)
-	        As[row][col] = Index(a, blockRow, k * TILE_SIZE + col);
+	        As[row][col] = Index(a, blockRow, k * TILE_SIZE + col, K, 1);
 	    else
             As[row][col] = 0;
 	    if (k * TILE_SIZE + row < K && blockCol < N)
-            Bs[row][col] = Index(b, k * TILE_SIZE + row, blockCol);
+            Bs[row][col] = Index(b, k * TILE_SIZE + row, blockCol, N, 1);
 	    else
             Bs[row][col] = 0;
         __syncthreads();
@@ -27,7 +29,7 @@ __global__ void op_mm_kernel(float *a, float *b, float *c, int M, int N, int K) 
         __syncthreads();
     }
     if (blockRow < M && blockCol < N)
-        Index(c, blockRow, blockCol) = r;
+        Index(c, blockRow, blockCol, N, 1) = r;
 }
 
 float run_basic_tiling(int M, int N, int K) {
