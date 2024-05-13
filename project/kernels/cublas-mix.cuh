@@ -38,7 +38,7 @@ float run_cublas(int M, int N, int K) {
     CUBLAS_CHECK(cublasLtMatrixLayoutCreate(&Bdesc, CUDA_R_16F, K, N, K));
     CUBLAS_CHECK(cublasLtMatrixLayoutCreate(&Cdesc, CUDA_R_32F, M, N, M));
 
-    cublasOperation_t transa = CUBLAS_OP_T;
+    cublasOperation_t transa = CUBLAS_OP_N;
     cublasOperation_t transb = CUBLAS_OP_N;
 
     cublasLtMatmulDesc_t operationDesc;
