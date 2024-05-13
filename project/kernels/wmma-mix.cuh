@@ -36,17 +36,17 @@ __global__ void matMulWMMA(half *a, half *b, float *c, int M, int N, int K, floa
     int warpM = (blockIdx.x * blockDim.x + threadIdx.x) / warpSize;
     int warpN = (blockIdx.y * blockDim.y + threadIdx.y);
     // Declare the fragments
-    wmma::fragment<wmma::matrix_a, WMMA_M, WMMA_N, WMMA_K, half, wmma::col_major> a_frag;
-    wmma::fragment<wmma::matrix_b, WMMA_M, WMMA_N, WMMA_K, half, wmma::col_major> b_frag;
-    wmma::fragment<wmma::accumulator, WMMA_M, WMMA_N, WMMA_K, float> acc_frag;
-    wmma::fragment<wmma::accumulator, WMMA_M, WMMA_N, WMMA_K, float> c_frag;
+    wmma::fragment<wmma::matrix_a, WARP_SIZE, WARP_SIZE, WARP_SIZE, half, wmma::col_major> a_frag;
+    wmma::fragment<wmma::matrix_b, WARP_SIZE, WARP_SIZE, WARP_SIZE, half, wmma::col_major> b_frag;
+    wmma::fragment<wmma::accumulator, WARP_SIZE, WARP_SIZE, WARP_SIZE, float> acc_frag;
+    wmma::fragment<wmma::accumulator, WARP_SIZE, WARP_SIZE, WARP_SIZE, float> c_frag;
     wmma::fill_fragment(acc_frag, 0.0f);
     // Loop over the K-dimension
-    for (int i = 0; i < K; i += WMMA_K) {
-        int aRow = warpM * WMMA_M;
+    for (int i = 0; i < K; i += WARP_SIZE) {
+        int aRow = warpM * WARP_SIZE;
         int aCol = i;
         int bRow = i;
-        int bCol = warpN * WMMA_N;
+        int bCol = warpN * WARP_SIZE;
         
         // Bounds checking
         if (aRow < M && aCol < K && bRow < K && bCol < N) {
@@ -59,8 +59,8 @@ __global__ void matMulWMMA(half *a, half *b, float *c, int M, int N, int K, floa
         }
     }
     // Load in current value of c, scale by beta, and add to result scaled by alpha
-    int cRow = warpM * WMMA_M;
-    int cCol = warpN * WMMA_N;
+    int cRow = warpM * WARP_SIZE;
+    int cCol = warpN * WARP_SIZE;
     
     if (cRow < M && cCol < N) {
         wmma::load_matrix_sync(c_frag, c + cRow + cCol * ldc, ldc, wmma::mem_col_major);
