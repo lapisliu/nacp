@@ -69,9 +69,9 @@ float run_wmma(int M, int N, int K) {
     dim3 blocksPerGrid((N + WARP_SIZE - 1) / WARP_SIZE, (M + WARP_SIZE - 1) / WARP_SIZE);
     CUDA_CHECK(cudaEventRecord(start));
     matMulWMMA<<<blocksPerGrid, threadsPerBlock>>>(a_d, b_d, c_d, M, N, K);
-    CUDA_KERNEL_CHECK();
     CUDA_CHECK(cudaEventRecord(stop));
     CUDA_CHECK(cudaEventSynchronize(stop));
+    cudaDeviceSynchronize();
 
     // Copy the result back to the host
     CUDA_CHECK(cudaMemcpy(c, c_d, M * N * sizeof(float), cudaMemcpyDeviceToHost));

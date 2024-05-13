@@ -47,12 +47,12 @@ int main(int argc, char* argv[]) {
     }
 
     // Output values for testing
-    std::cout << "-m= " << requiredFlags["m"] << std::endl;
-    std::cout << "-n= " << requiredFlags["n"] << std::endl;
-    std::cout << "-k= " << requiredFlags["k"] << std::endl;
-    std::cout << "-b run cublas" << (bFlag ? "true" : "false") << std::endl;
-    std::cout << "-w run wmma" << (wFlag ? "true" : "false") << std::endl;
-    std::cout << "-l run basic tiling" << (lFlag ? "true" : "false") << std::endl;
+    std::cout << "-m=" << requiredFlags["m"] << std::endl;
+    std::cout << "-n=" << requiredFlags["n"] << std::endl;
+    std::cout << "-k=" << requiredFlags["k"] << std::endl;
+    std::cout << "-b run cublas? " << (bFlag ? "true" : "false") << std::endl;
+    std::cout << "-w run wmma? " << (wFlag ? "true" : "false") << std::endl;
+    std::cout << "-l run basic tiling? " << (lFlag ? "true" : "false") << std::endl;
 
     int M = requiredFlags["m"];
     int N = requiredFlags["n"];
