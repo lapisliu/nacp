@@ -50,17 +50,23 @@ int main(int argc, char* argv[]) {
     std::cout << "-m= " << requiredFlags["m"] << std::endl;
     std::cout << "-n= " << requiredFlags["n"] << std::endl;
     std::cout << "-k= " << requiredFlags["k"] << std::endl;
-    std::cout << "-b " << (bFlag ? "true" : "false") << std::endl;
-    std::cout << "-w " << (wFlag ? "true" : "false") << std::endl;
-    std::cout << "-l " << (lFlag ? "true" : "false") << std::endl;
+    std::cout << "-b run cublas" << (bFlag ? "true" : "false") << std::endl;
+    std::cout << "-w run wmma" << (wFlag ? "true" : "false") << std::endl;
+    std::cout << "-l run basic tiling" << (lFlag ? "true" : "false") << std::endl;
 
     int M = requiredFlags["m"];
     int N = requiredFlags["n"];
     int K = requiredFlags["k"];
 
-    if (bFlag) run_cublas(M, N, K);
-    if (wFlag) run_wmma(M, N, K);
-    if (lFlag) run_basic_tiling(M, N, K);
+    if (bFlag) {
+	    std::cout << "cublas time (ms):" << run_cublas(M, N, K) << std::endl;
+    }
+    if (wFlag) {
+	    std::cout << "wmma time (ms):" << run_wmma(M, N, K) << std::endl;
+    }
+    if (lFlag) {
+	    std::cout << "basic tiling time (ms):" << run_basic_tiling(M, N, K) << std::endl;
+    }
 
     std::cout << "done" << std::endl;
     return 0;
