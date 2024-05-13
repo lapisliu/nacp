@@ -2,14 +2,6 @@
 
 #include "util.h"
 
-#include <cuda.h>
-#include <mma.h>
-#include <cublasLt.h>
-#include <iostream>
-
-#include "cuda_runtime.h"
-#include "cublas_v2.h"
-
 using namespace nvcuda;
 constexpr int WARP_SIZE = 16;
 
