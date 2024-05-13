@@ -1,28 +1,35 @@
-cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
-project(MyCUDAProject LANGUAGES CXX CUDA)
+cmake_minimum_required(VERSION 3.18)
+project(nacp)
 
-# Specify the CUDA architecture
-set(CUDA_ARCHITECTURE "70" CACHE STRING "CUDA architecture")
-set(CMAKE_CUDA_ARCHITECTURES ${CUDA_ARCHITECTURE})
+enable_language(CUDA)
+find_package(CUDA REQUIRED)
+find_package(CUBLAS REQUIRED)
 
-# Include directories
 include_directories(
-    ${CMAKE_SOURCE_DIR}/include
+    ${CUDA_INCLUDE_DIRS}
+    ${CMAKE_SOURCE_DIR}
+    ${CUBLAS_INCLUDE_DIRS}
 )
 
-# Find CUDA and cuBLAS
-find_package(CUDA REQUIRED)
-find_package(CUDAToolkit REQUIRED COMPONENTS CUDA cuBLAS)
+set(SOURCE_FILES
+    runner.cu
+    kernels/kernel1.cuh
+    kernels/kernel2.cuh
+    kernels/kernel3.cuh
+    util.h
+)
 
-# Add .cuh and .h files
-file(GLOB_RECURSE CUDA_SOURCES "${CMAKE_SOURCE_DIR}/kernels/*.cuh")
-file(GLOB_RECURSE HEADERS "${CMAKE_SOURCE_DIR}/include/*.h")
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-# Executable
-add_executable(${PROJECT_NAME} runner.cu ${CUDA_SOURCES} ${HEADERS})
+target_link_libraries(${PROJECT_NAME}
+    ${CUDA_LIBRARIES}
+    ${CUBLAS_LIBRARIES}
+    cuda
+    cublas
+)
 
-# Link libraries
-# target_link_libraries(${PROJECT_NAME} -lcublas -lcublasLt)
-
-# Specify C++ standard
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
+
+target_compile_options(${PROJECT_NAME} PRIVATE $<$<COMPILE_LANGUAGE:CUDA>:
+    -arch=sm_70
+>)
