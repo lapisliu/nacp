@@ -66,11 +66,11 @@ float run_basic_tiling(int M, int N, int K) {
     op_mm_kernel<<<dimGrid, dimBlock>>>(a_d, b_d, c_d, M, N, K);
     CUDA_CHECK(cudaEventRecord(stop));
     CUDA_CHECK(cudaEventSynchronize(stop));
-    cudaDeviceSynchronize();
+    CUDA_CHECK(cudaEventElapsedTime(&eventMs, start, stop));
+    // cudaDeviceSynchronize();
 
     // Copy the result back to the host
     CUDA_CHECK(cudaMemcpy(c, c_d, M * N * sizeof(float), cudaMemcpyDeviceToHost));
-    CUDA_CHECK(cudaEventElapsedTime(&eventMs, start, stop));
     for (int i = 0; i < 5; i ++) {
         std::cout << c[i] << " ";
     }

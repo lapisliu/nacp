@@ -61,11 +61,11 @@ float run_cublas(int M, int N, int K) {
     CUBLAS_CHECK(cublasLtMatmul(handle, operationDesc, &alpha, a_d, Adesc, b_d, Bdesc, &beta, c_d, Cdesc, c_d, Cdesc, &heuristicResult.algo, nullptr, 0, 0));
     CUDA_CHECK(cudaEventRecord(stop));
     CUDA_CHECK(cudaEventSynchronize(stop));
-    CUDA_CHECK(cudaDeviceSynchronize());
+    CUDA_CHECK(cudaEventElapsedTime(&eventMs, start, stop));
+    // CUDA_CHECK(cudaDeviceSynchronize());
 
     // Copy the result back to the host
     CUDA_CHECK(cudaMemcpy(c, c_d, M * N * sizeof(float), cudaMemcpyDeviceToHost));
-    CUDA_CHECK(cudaEventElapsedTime(&eventMs, start, stop));
     for (int i = 0; i < 5; i++) {
         std::cout << c[i] << " ";
     }
