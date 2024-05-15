@@ -66,9 +66,11 @@ float run_cublas(int M, int N, int K) {
 
     // Copy the result back to the host
     CUDA_CHECK(cudaMemcpy(c, c_d, M * N * sizeof(float), cudaMemcpyDeviceToHost));
+    std::cout<<"cublas-mix result sample: ";
     for (int i = 0; i < 5; i++) {
         std::cout << c[i] << " ";
     }
+    std::cout<<std::endl;
 
     // Cleanup
     cudaFree(a_d);

@@ -70,10 +70,12 @@ float run_basic_tiling(int M, int N, int K) {
     // cudaDeviceSynchronize();
 
     // Copy the result back to the host
+    std::cout<<"basic_tiling result sample: ";
     CUDA_CHECK(cudaMemcpy(c, c_d, M * N * sizeof(float), cudaMemcpyDeviceToHost));
     for (int i = 0; i < 5; i ++) {
         std::cout << c[i] << " ";
     }
+    std::cout<<std::endl;
 
     // Cleanup
     cudaFree(a_d);
