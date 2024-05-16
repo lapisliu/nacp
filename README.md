@@ -27,3 +27,6 @@ Compile
 `hipcc mat-mul.cu.hip -o mat-mul-amd.out`
 
 `time ./mat-mul-amd.out`
+
+## Eval usage
+The runner-kernel architecture for evaluation is in `project/`. To build the runner, first make sure the GPU arch number in `CMakeLists.txt` matches the arch number of the current GPU. Then `mkdir build && cd build` and `cmake ..`.
